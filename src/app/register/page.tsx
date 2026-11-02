@@ -165,7 +165,7 @@ export default function RegisterPage() {
                             </Field>
 
                             <Field>
-                                <Button type="submit">Register</Button>
+                                <Button type="submit" className="bg-green-700 hover:bg-green-800">Register</Button>
 
                                 <FieldDescription className="text-center">
                                     Have an account? <a href="/login">Login</a>
