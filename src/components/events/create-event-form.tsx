@@ -102,10 +102,21 @@ export function CreateEventForm() {
     if (form.dateError) setField("dateError", null)
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    console.log("Form submitted:", form)
 
+    const res = await fetch("http://localhost:8000/create-event", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    })
+
+    const data = await res.json()
+    console.log("Server response:", data)
+
+  
     // Native pickers respect min="" today, but manual typing can bypass it
     // (and some browsers accept shifting); validate the value defensively.
     if (!form.eventDate) {
@@ -312,10 +323,10 @@ export function CreateEventForm() {
         </div>
 
         {/* Attached organizer email (read-only until auth exists) */}
-        <div className="flex h-10 items-center justify-between rounded-lg border border-input bg-input/30 px-3 text-sm">
+        {/* <div className="flex h-10 items-center justify-between rounded-lg border border-input bg-input/30 px-3 text-sm">
           <span className="text-muted-foreground">Organizer Email attached:</span>
           <span className="font-semibold text-foreground">mypit@mailinator.com</span>
-        </div>
+        </div> */}
 
         <Button
           type="submit"

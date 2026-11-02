@@ -1,0 +1,144 @@
+
+
+import Image from 'next/image';
+import React from 'react';
+
+const EventsDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+    const { id } = await params;
+    const res = await fetch(`http://localhost:8000/event/${id}`)
+    const data = await res.json()
+    console.log(data);
+    return (
+        <div className="max-w-5xl mx-auto my-10 bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
+
+            {/* Hero Banner */}
+            <div className="relative h-[350px]">
+                <Image
+                    src={data.imageUrl}
+                    alt={data.title}
+                    fill
+                    className="object-cover"
+                />
+
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                {/* Event Type */}
+                <span className="absolute top-5 left-5 bg-white  text-gray-800 text-xs font-medium px-3 py-1.5 rounded-full">
+                    🌿 {data.eventType}
+                </span>
+
+                {/* Event Title & Info */}
+                <div className="absolute bottom-6 left-6 text-white">
+                    <h1 className="text-3xl md:text-4xl font-bold mb-3">
+                        {data.title}
+                    </h1>
+
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-200 ">
+                        <p>📍 {data.location}</p>
+                        <p>
+                            📅{" "}
+                            {new Date(data.eventDate).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                                year: "numeric",
+                            })}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Event Content */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6 md:p-8">
+
+                {/* Left Section */}
+                <div className="md:col-span-2">
+
+                    {/* Volunteer Status */}
+                    <div className="flex items-center justify-between gap-4 bg-gray-50 dark:bg-gray-800 border rounded-xl p-4 mb-8">
+                        <div>
+                            <h3 className="font-semibold text-gray-800 dark:text-gray-200">
+                                Volunteer Opportunity
+                            </h3>
+                            <p className="text-xs text-gray-500">
+                                Join us and make a difference in the community.
+                            </p>
+                        </div>
+
+                        <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg text-sm font-medium">
+                            Join Event
+                        </button>
+                    </div>
+
+                    {/* Description */}
+                    <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">
+                        About this Social Initiative
+                    </h2>
+
+                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-7">
+                        {data.description}
+                    </p>
+
+                    <hr className="my-6" />
+
+                    {/* Volunteer Guidelines */}
+                    <h3 className="text-xs font-semibold text-gray-500 uppercase mb-3">
+                        Volunteer Guidelines
+                    </h3>
+
+                    <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
+                        <li>🟢 Please arrive at the designated location on time.</li>
+                        <li>🟢 Be comfortable with social work and distribution.</li>
+                        <li>🟢 Follow the event organizer`s instructions.</li>
+                    </ul>
+                </div>
+
+                {/* Right Section */}
+                <div className="space-y-4">
+
+                    {/* Organizer Card */}
+                    <div className="border rounded-xl p-4">
+                        <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-4">
+                            Initiative Organizer
+                        </h3>
+
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
+                                👤
+                            </div>
+
+                            <div>
+                                <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                                    Event Organizer
+                                </h4>
+                                <p className="text-xs text-gray-500 dark:text-gray-400">
+                                    Organizer of this initiative
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr className="my-4" />
+
+                        <p className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold ">
+                            ✓ Verified Platform Member
+                        </p>
+                    </div>
+
+                    {/* Volunteer Card */}
+                    <div className="border rounded-xl p-4 dark:bg-gray-800">
+                        <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-3">
+                            Confirmed Volunteers
+                        </h3>
+
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Volunteer registration is open.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default EventsDetailsPage;

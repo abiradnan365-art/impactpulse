@@ -2,6 +2,7 @@ import { Award, CirclePlus, Sparkles, TreePine, Users } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "cn"
+import Link from "next/link"
 
 const stats = [
   {
@@ -48,13 +49,17 @@ export function Banner() {
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
+            <Link href="/upcoming-events">
             <Button className="h-11 rounded-xl bg-white px-6 text-emerald-800 hover:bg-emerald-50">
               Explore Upcoming Events
             </Button>
-            <Button className="h-11 rounded-xl border border-white/30 bg-white/10 px-6 text-white hover:bg-white/20">
-              <CirclePlus className="size-4" data-icon="inline-start" />
-              Create Events
-            </Button>
+            </Link>
+            <Link href="/create-event" >
+              <Button className="h-11 rounded-xl border border-white/30 bg-white/10 px-6 text-white hover:bg-white/20">
+                <CirclePlus className="size-4" data-icon="inline-start" />
+                Create Events
+              </Button>
+            </Link>
           </div>
         </div>
 
