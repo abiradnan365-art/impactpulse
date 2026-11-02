@@ -72,7 +72,7 @@ export function Features() {
               className={cn(
                 "rounded-2xl border bg-card p-6 transition-shadow hover:shadow-md",
                 feature.featured
-                  ? "border-emerald-400 shadow-sm shadow-emerald-200/60 dark:border-emerald-400/50 dark:shadow-black/20"
+                  ? " shadow-sm  dark:shadow-black/20"
                   : "border-border/80"
               )}
             >

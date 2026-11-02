@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button"
 import { cn } from "cn"
 
 const navLinks = [
-  { label: "Home", href: "#", active: true },
-  { label: "Upcoming Events", href: "#", active: false },
+  { label: "Home", href: "/", active: true },
+  { label: "Upcoming Events", href: "/upcoming-events", active: false },
 ]
 
 export function Navbar() {

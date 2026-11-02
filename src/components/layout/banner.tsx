@@ -26,7 +26,7 @@ const stats = [
 
 export function Banner() {
   return (
-    <section className="mx-auto w-full max-w-7xl overflow-hidden rounded-4xl bg-gradient-to-r from-emerald-800 via-emerald-600 to-teal-500 px-6 py-12 text-white sm:px-10 lg:px-14 lg:py-14">
+    <section className="mx-auto w-full max-w-7xl overflow-hidden rounded-4xl bg-gradient-to-r from-emerald-800 via-emerald-600 to-teal-500 dark:from-slate-950 dark:via-slate-900 dark:to-emerald-950 px-6 py-12 text-white sm:px-10 lg:px-14 lg:py-14">
       <div className="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between">
         {/* Copy + CTAs */}
         <div className="max-w-2xl">
@@ -49,11 +49,11 @@ export function Banner() {
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button className="h-11 rounded-xl bg-white px-6 text-emerald-800 hover:bg-emerald-50">
-              Find Volunteer Drives
+              Explore Upcoming Events
             </Button>
             <Button className="h-11 rounded-xl border border-white/30 bg-white/10 px-6 text-white hover:bg-white/20">
               <CirclePlus className="size-4" data-icon="inline-start" />
-              Start a Social Drive
+              Create Events
             </Button>
           </div>
         </div>

@@ -1,13 +1,12 @@
 import { Banner } from "@/components/layout/banner";
 import { Features } from "@/components/layout/features";
-import { Footer } from "@/components/layout/footer";
-import { Navbar } from "@/components/layout/navbar";
+
 import { Newsletter } from "@/components/layout/newsletter";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
+     
       <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
         <Banner />
         <div className="-mx-4 sm:-mx-6 lg:-mx-8">
@@ -15,7 +14,7 @@ export default function Home() {
         </div>
       </main>
       <Newsletter />
-      <Footer />
+   
     </>
   );
 }
