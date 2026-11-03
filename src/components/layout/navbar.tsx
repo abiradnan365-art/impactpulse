@@ -81,19 +81,22 @@ export function Navbar() {
                 <PopoverHeader>
                   <PopoverTitle className="text-lg font-semibold">{user.name}</PopoverTitle>
 
-                  <PopoverDescription className="">
+                  <PopoverDescription className="flex flex-col ">
                     {user.email} <br />
-                    <hr className="my-2" />
-                    <Link href="/create-event" className="text-emerald-600 text-lg">
+                  
+                    <Link href="/create-event" className="text-emerald-600 text-lg border-t mt-2 ">
                       Create Event
                     </Link><br />
                     <Link href="/manage-events" className="text-emerald-600 text-lg">
                       Manage Events
                     </Link><br />
-                     <Link href="/joined-events" className="text-emerald-600 text-lg">
-                     Joined Events
-                    </Link><br />
-                    <hr className="my-2" />
+                     <Link href="/joined-events" className="text-emerald-600 text-lg ">
+                   
+                      Joined Events
+                    
+                     
+                    </Link><br className="mt-100" />
+                    
                     <Button variant="destructive" onClick={handleLogout}>
                       Logout
                     </Button>

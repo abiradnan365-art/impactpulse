@@ -23,6 +23,14 @@ import { toast } from "react-toastify"
 import type { FormEvent } from "react"
 
 export default function LoginPage() {
+
+    const handleGoogleLogin = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+        console.log("Google login data:", data);
+    }
+
     const router = useRouter()
 
     const handleEmailLogin = async (e: FormEvent<HTMLFormElement>) => {
@@ -87,7 +95,7 @@ export default function LoginPage() {
                     <form onSubmit={handleEmailLogin}>
                         <FieldGroup>
                             <Field>
-                                <Button variant="outline" type="button">
+                                <Button variant="outline" type="button" onClick={handleGoogleLogin}>
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 24 24"

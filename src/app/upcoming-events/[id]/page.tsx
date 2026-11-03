@@ -1,21 +1,23 @@
 
 
+import JoiningCard from '@/components/joining/JoiningCard';
+import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import React from 'react';
 
 const EventsDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
     const res = await fetch(`http://localhost:8000/event/${id}`)
-    const data = await res.json()
-    console.log(data);
+    const event = await res.json()
+    console.log(event);
     return (
         <div className="max-w-5xl mx-auto my-10 bg-white dark:bg-gray-900 rounded-2xl shadow-lg overflow-hidden">
 
             {/* Hero Banner */}
             <div className="relative h-[350px]">
                 <Image
-                    src={data.imageUrl}
-                    alt={data.title}
+                    src={event.imageUrl}
+                    alt={event.title}
                     fill
                     className="object-cover"
                 />
@@ -25,20 +27,20 @@ const EventsDetailsPage = async ({ params }: { params: Promise<{ id: string }> }
 
                 {/* Event Type */}
                 <span className="absolute top-5 left-5 bg-white  text-gray-800 text-xs font-medium px-3 py-1.5 rounded-full">
-                    🌿 {data.eventType}
+                    🌿 {event.eventType}
                 </span>
 
                 {/* Event Title & Info */}
                 <div className="absolute bottom-6 left-6 text-white">
                     <h1 className="text-3xl md:text-4xl font-bold mb-3">
-                        {data.title}
+                        {event.title}
                     </h1>
 
                     <div className="flex flex-wrap gap-4 text-sm text-gray-200 ">
-                        <p>📍 {data.location}</p>
+                        <p>📍 {event.location}</p>
                         <p>
                             📅{" "}
-                            {new Date(data.eventDate).toLocaleDateString("en-US", {
+                            {new Date(event.eventDate).toLocaleDateString("en-US", {
                                 month: "short",
                                 day: "numeric",
                                 year: "numeric",
@@ -55,20 +57,8 @@ const EventsDetailsPage = async ({ params }: { params: Promise<{ id: string }> }
                 <div className="md:col-span-2">
 
                     {/* Volunteer Status */}
-                    <div className="flex items-center justify-between gap-4 bg-gray-50 dark:bg-gray-800 border rounded-xl p-4 mb-8">
-                        <div>
-                            <h3 className="font-semibold text-gray-800 dark:text-gray-200">
-                                Volunteer Opportunity
-                            </h3>
-                            <p className="text-xs text-gray-500">
-                                Join us and make a difference in the community.
-                            </p>
-                        </div>
+                    <JoiningCard event={event}/>
 
-                        <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2 rounded-lg text-sm font-medium">
-                            Join Event
-                        </button>
-                    </div>
 
                     {/* Description */}
                     <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-3">
@@ -76,7 +66,7 @@ const EventsDetailsPage = async ({ params }: { params: Promise<{ id: string }> }
                     </h2>
 
                     <p className="text-sm text-gray-600 dark:text-gray-400 leading-7">
-                        {data.description}
+                        {event.description}
                     </p>
 
                     <hr className="my-6" />
