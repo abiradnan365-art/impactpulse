@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "cn"
+import { authClient } from "@/lib/auth-client";
 
 // Local midnight in yyyy-MM-dd (the value ships with <input type="date">).
 // Module-level so it is computed once — avoids hydration churn, and the
@@ -89,7 +90,9 @@ const initialFormState: EventFormState = {
 
 export function CreateEventForm() {
   const [form, setForm] = React.useState<EventFormState>(initialFormState)
-  
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+
   function setField<Key extends keyof EventFormState>(
     key: Key,
     value: EventFormState[Key]
@@ -103,32 +106,55 @@ export function CreateEventForm() {
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const res = await fetch("http://localhost:8000/create-event", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    })
+    // Check if user is logged in
+    if (!user?.id) {
+      alert("Please login first to create an event.");
+      return;
+    }
 
-    const data = await res.json()
-    console.log("Server response:", data)
-
-  
-    // Native pickers respect min="" today, but manual typing can bypass it
-    // (and some browsers accept shifting); validate the value defensively.
+    // Validate event date
     if (!form.eventDate) {
-      setField("dateError", "Please choose an event date.")
-      return
+      setField("dateError", "Please choose an event date.");
+      return;
     }
+
     if (form.eventDate < MIN_DATE) {
-      setField("dateError", "Event date must be today or later.")
-      return
+      setField("dateError", "Event date must be today or later.");
+      return;
     }
-    setField("dateError", null)
-    setField("published", true)
+
+    setField("dateError", null);
+
+    // Add logged-in user ID with event data
+    const eventData = {
+      ...form,
+      createdBy: user.id,
+    };
+
+    try {
+      const res = await fetch("http://localhost:8000/create-event", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventData),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to create event");
+      }
+
+      const data = await res.json();
+
+      console.log("Server response:", data);
+
+      setField("published", true);
+    } catch (error) {
+      console.error("Create event error:", error);
+      alert("Something went wrong while creating the event.");
+    }
   }
 
   function handleReset() {
@@ -323,10 +349,16 @@ export function CreateEventForm() {
         </div>
 
         {/* Attached organizer email (read-only until auth exists) */}
-        {/* <div className="flex h-10 items-center justify-between rounded-lg border border-input bg-input/30 px-3 text-sm">
-          <span className="text-muted-foreground">Organizer Email attached:</span>
-          <span className="font-semibold text-foreground">mypit@mailinator.com</span>
-        </div> */}
+        {/* Attached organizer email */}
+        <div className="flex h-10 items-center justify-between rounded-lg border border-input bg-input/30 px-3 text-sm">
+          <span className="text-muted-foreground">
+            Organizer Email attached:
+          </span>
+
+          <span className="font-semibold text-foreground">
+            {user?.email || "Loading email..."}
+          </span>
+        </div>
 
         <Button
           type="submit"

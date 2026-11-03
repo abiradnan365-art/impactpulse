@@ -1,6 +1,7 @@
 
 
 import JoiningCard from '@/components/joining/JoiningCard';
+import OrganizerCard from '@/components/OrganizerCard';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import React from 'react';
@@ -87,32 +88,8 @@ const EventsDetailsPage = async ({ params }: { params: Promise<{ id: string }> }
                 <div className="space-y-4">
 
                     {/* Organizer Card */}
-                    <div className="border rounded-xl p-4">
-                        <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-4">
-                            Initiative Organizer
-                        </h3>
-
-                        <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
-                                👤
-                            </div>
-
-                            <div>
-                                <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200">
-                                    Event Organizer
-                                </h4>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">
-                                    Organizer of this initiative
-                                </p>
-                            </div>
-                        </div>
-
-                        <hr className="my-4" />
-
-                        <p className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold ">
-                            ✓ Verified Platform Member
-                        </p>
-                    </div>
+                   
+                    <OrganizerCard event={event} />
 
                     {/* Volunteer Card */}
                     <div className="border rounded-xl p-4 dark:bg-gray-800">

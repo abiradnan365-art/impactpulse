@@ -55,16 +55,16 @@ export function EventCard({ event }: { event: DisplayEvent }) {
 
         <div className="mt-4 border-t border-border/60 pt-4">
           <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
-            <User className="size-4 shrink-0" />
-            {event.organizer || "ImpactPulse Community"}
+
+            <Link href={`/upcoming-events/${event.id}`} className=" mt-4 h-10 w-full rounded-lg bg-emerald-600 font-bold text-white hover:bg-emerald-700 flex items-center justify-center gap-2">
+              <Button className=" mt-4 h-10 w-full rounded-lg bg-emerald-600 font-bold text-white hover:bg-emerald-700">
+                View Event
+                <ArrowRight className="size-4" />
+              </Button>
+            </Link>
           </p>
         </div>
-       <Link href={`/upcoming-events/${event.id}`} className="mt-4 h-10 w-full rounded-lg bg-emerald-600 font-bold text-white hover:bg-emerald-700 flex items-center justify-center gap-2"> 
-        <Button className="mt-4 h-10 w-full rounded-lg bg-emerald-600 font-bold text-white hover:bg-emerald-700">
-          View Event
-          <ArrowRight className="size-4" />
-        </Button>
-        </Link>
+
       </div>
     </article>
   )

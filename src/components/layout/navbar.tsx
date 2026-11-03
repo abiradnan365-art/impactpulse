@@ -90,7 +90,7 @@ export function Navbar() {
                     <Link href="/manage-events" className="text-emerald-600 text-lg">
                       Manage Events
                     </Link><br />
-                     <Link href="/joined-events" className="text-emerald-600 text-lg ">
+                     <Link href="/my-joining" className="text-emerald-600 text-lg ">
                    
                       Joined Events
                     

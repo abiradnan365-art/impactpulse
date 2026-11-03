@@ -1,6 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
+
 import { CreateEventForm } from "@/components/events/create-event-form";
 
 export default function CreateEventPage() {
