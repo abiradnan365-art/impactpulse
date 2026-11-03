@@ -29,6 +29,7 @@ import {
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "cn"
 import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify"
 
 // Local midnight in yyyy-MM-dd (the value ships with <input type="date">).
 // Module-level so it is computed once — avoids hydration churn, and the
@@ -110,7 +111,7 @@ export function CreateEventForm() {
 
     // Check if user is logged in
     if (!user?.id) {
-      alert("Please login first to create an event.");
+      toast.error("Please login first to create an event.");
       return;
     }
 

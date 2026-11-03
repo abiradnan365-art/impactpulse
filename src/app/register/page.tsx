@@ -163,6 +163,13 @@ export default function RegisterPage() {
                                     required
                                 />
                             </Field>
+                            
+                                <ul className="text-sm text-muted-foreground mt-1 list-disc list-inside">
+                                    <li>At least 6 characters</li>
+                                    <li>At least one uppercase letter</li>
+                                    <li>At least one lowercase letter</li>
+                                </ul>
+                           
 
                             <Field>
                                 <Button type="submit" className="bg-green-700 hover:bg-green-800">Register</Button>

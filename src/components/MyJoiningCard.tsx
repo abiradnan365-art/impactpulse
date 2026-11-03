@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
 interface JoiningEvent {
     _id: string;
     imageUrl: string;
@@ -95,7 +96,7 @@ const MyJoiningCard = ({ joiningData }: MyJoiningCardProps) => {
                             className="flex items-center justify-center gap-2 w-full bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white font-semibold text-sm py-3 rounded-2xl transition-all duration-300 shadow-md"
                         >
                             View Event
-                            <span>→</span>
+                            <ArrowRight />
                         </Link>
                     </div>
                 </div>

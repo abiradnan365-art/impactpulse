@@ -1,7 +1,8 @@
 import { Banner } from "@/components/layout/banner";
 import { Features } from "@/components/layout/features";
-
+import RecentEvents from "@/components/layout/recentEvents";
 import { Newsletter } from "@/components/layout/newsletter";
+import GallerySection from "@/components/layout/gallerySection";
 
 export default function Home() {
   return (
@@ -12,6 +13,8 @@ export default function Home() {
         <div className="-mx-4 sm:-mx-6 lg:-mx-8">
           <Features />
         </div>
+        <RecentEvents />
+        <GallerySection />
       </main>
       <Newsletter />
    
