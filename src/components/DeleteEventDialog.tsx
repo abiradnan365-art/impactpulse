@@ -18,7 +18,7 @@ import { getTokenFromClient } from "@/lib/getTokenFromClient";
 const DeleteEventDialog = ({event, onDeleted}: {event: Event & {_id: string}, onDeleted: () => void}) => {
     const handleDelete = async () => {
         const token = await getTokenFromClient();
-        const res = await fetch(`http://localhost:8000/event/${event._id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/event/${event._id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

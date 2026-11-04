@@ -44,7 +44,7 @@ export default function ManageEventsPage() {
                 setError("");
 
                 const res = await fetch(
-                    `http://localhost:8000/my-events/${userId}`,
+                    `${process.env.NEXT_PUBLIC_API_URL}/my-events/${userId}`,
                     {
                         headers: {
                             "Content-Type": "application/json",

@@ -25,7 +25,7 @@ const JoiningCard = ({ event }: { event: Record<string, unknown> }) => {
 
         // Check if the user already joined this event
         const checkRes = await fetch(
-            `http://localhost:8000/my-joining/${user?.email}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/my-joining/${user?.email}`,
             {
                 headers: {
                     authorization: `Bearer ${token}`,
@@ -53,7 +53,7 @@ const JoiningCard = ({ event }: { event: Record<string, unknown> }) => {
             joiningDate: new Date(),
         };
 
-        const res = await fetch("http://localhost:8000/joining", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/joining`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

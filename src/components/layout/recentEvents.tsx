@@ -19,7 +19,7 @@ const RecentEvents = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8000/recent-upcoming-events")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/recent-upcoming-events`)
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch events");

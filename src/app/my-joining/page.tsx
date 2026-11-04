@@ -12,7 +12,7 @@ const MyJoiningPage = async ()  => {
     const user = session?.user;
      const token = await getTokenFromServer();
     
-    const res = await fetch(`http://localhost:8000/my-joining/${user?.email}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/my-joining/${user?.email}`,{
         headers: {
             authorization: `Bearer ${token}`,
         }

@@ -118,7 +118,7 @@ const EditEventDialog = ({ event, onUpdated }: EditEventDialogProps) => {
             setLoading(true);
 
             const res = await fetch(
-                `http://localhost:8000/update-event/${event._id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/update-event/${event._id}`,
                 {
                     method: "PATCH",
                     headers: {

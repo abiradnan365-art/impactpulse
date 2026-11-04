@@ -28,7 +28,7 @@ const OrganizerCard = ({ event }: OrganizerCardProps) => {
         const fetchOrganizer = async () => {
             try {
                 const res = await fetch(
-                    `http://localhost:8000/user/${event.createdBy}`
+                    `${process.env.NEXT_PUBLIC_API_URL}/user/${event.createdBy}`
                 );
 
                 if (!res.ok) {

@@ -37,7 +37,7 @@ function normalizeEvent(raw: unknown, index: number): DisplayEvent {
 }
 
 async function loadEvents(): Promise<DisplayEvent[]> {
-  const response = await fetch("http://localhost:8000/events", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
     cache: "no-store",
   });
   if (!response.ok) {
