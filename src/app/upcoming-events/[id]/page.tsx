@@ -3,12 +3,21 @@
 import JoiningCard from '@/components/joining/JoiningCard';
 import OrganizerCard from '@/components/OrganizerCard';
 import { Button } from '@/components/ui/button';
+import { auth } from '@/lib/auth';
+import { getTokenFromServer } from '@/lib/getTokenFromServer';
+import { headers } from 'next/headers';
 import Image from 'next/image';
 import React from 'react';
 
 const EventsDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
-    const res = await fetch(`http://localhost:8000/event/${id}`)
+    const token = await getTokenFromServer();
+    console.log("EventsDetailsPage token:", token);
+    const res = await fetch(`http://localhost:8000/event/${id}`,{
+        headers: {
+            authorization: `Bearer ${token}`,
+        }
+    })
     const event = await res.json()
     console.log(event);
     return (
@@ -16,12 +25,7 @@ const EventsDetailsPage = async ({ params }: { params: Promise<{ id: string }> }
 
             {/* Hero Banner */}
             <div className="relative h-[350px]">
-                <Image
-                    src={event.imageUrl}
-                    alt={event.title}
-                    fill
-                    className="object-cover"
-                />
+                <Image src={event.imageUrl} alt={event.title} fill className="object-cover"/>
 
                 {/* Dark Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

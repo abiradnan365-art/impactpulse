@@ -9,6 +9,7 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import EditEventDialog from "@/components/EditEventDialog";
 import DeleteEventDialog from "@/components/DeleteEventDialog";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 type Event = {
     _id: string;
@@ -28,6 +29,7 @@ export default function ManageEventsPage() {
     const [events, setEvents] = useState<Event[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
+   
 
     useEffect(() => {
         const userId = user?.id;
@@ -37,11 +39,18 @@ export default function ManageEventsPage() {
         let isMounted = true;
 
         async function fetchMyEvents() {
+             const token = await getTokenFromClient();
             try {
                 setError("");
 
                 const res = await fetch(
-                    `http://localhost:8000/my-events/${userId}`
+                    `http://localhost:8000/my-events/${userId}`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            authorization: `Bearer ${token}`,
+                        }
+                    }
                 );
 
                 if (!res.ok) {

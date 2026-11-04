@@ -1,5 +1,6 @@
 import MyJoiningCard from '@/components/MyJoiningCard';
 import { auth } from '@/lib/auth';
+import { getTokenFromServer } from '@/lib/getTokenFromServer';
 import { headers } from 'next/headers';
 import React from 'react';
 
@@ -9,8 +10,13 @@ const MyJoiningPage = async ()  => {
         headers: await headers(),
     })
     const user = session?.user;
+     const token = await getTokenFromServer();
     
-    const res = await fetch(`http://localhost:8000/my-joining/${user?.email}`)
+    const res = await fetch(`http://localhost:8000/my-joining/${user?.email}`,{
+        headers: {
+            authorization: `Bearer ${token}`,
+        }
+    })
     const joiningData = await res.json();
     console.log("MyJoiningPage joiningData:", joiningData);
 

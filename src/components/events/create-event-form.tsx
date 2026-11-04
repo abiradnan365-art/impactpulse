@@ -30,6 +30,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { cn } from "cn"
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify"
+import { getTokenFromClient } from "@/lib/getTokenFromClient"
 
 // Local midnight in yyyy-MM-dd (the value ships with <input type="date">).
 // Module-level so it is computed once — avoids hydration churn, and the
@@ -108,6 +109,7 @@ export function CreateEventForm() {
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const token = await getTokenFromClient(); 
 
     // Check if user is logged in
     if (!user?.id) {
@@ -139,6 +141,7 @@ export function CreateEventForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`, 
         },
         body: JSON.stringify(eventData),
       });
@@ -147,14 +150,14 @@ export function CreateEventForm() {
         throw new Error("Failed to create event");
       }
 
-      const data = await res.json();
+      const result = await res.json();
 
-      console.log("Server response:", data);
+      console.log("Server response:", result);
 
       setField("published", true);
     } catch (error) {
       console.error("Create event error:", error);
-      alert("Something went wrong while creating the event.");
+      toast.error("Something went wrong while creating the event.");
     }
   }
 

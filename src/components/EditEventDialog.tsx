@@ -40,6 +40,7 @@ import {
 
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { getTokenFromClient} from "@/lib/getTokenFromClient";
 
 const eventTypes = [
     "Donation",
@@ -106,6 +107,8 @@ const EditEventDialog = ({ event, onUpdated }: EditEventDialogProps) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        const token = await getTokenFromClient(); 
+
         if (!event._id) {
             toast.error("Event ID not found!");
             return;
@@ -120,6 +123,7 @@ const EditEventDialog = ({ event, onUpdated }: EditEventDialogProps) => {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json",
+                        authorization: `Bearer ${token}`,
                     },
                     body: JSON.stringify(form),
                 }

@@ -24,7 +24,7 @@ export const config = {
     '/create-event',
     '/manage-events',
     '/my-joining',
-    '/upcoming-events',
-    
+    '/upcoming-events/:path',
+  
   ]
 }

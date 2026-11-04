@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import React from 'react';
 
@@ -48,16 +49,16 @@ const galleryItems = [
 
 const gallerySection = () => {
   return (
-    <section className="bg-white py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <span className="text-emerald-500 font-semibold tracking-widest text-xs uppercase">
             VISUAL STORIES
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2 mb-3">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-2 mb-3">
             Community in Action
           </h2>
-          <p className="text-slate-500 text-sm sm:text-base max-w-2xl mx-auto">
+          <p className="text-slate-500 dark:text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
             Moments from volunteer drives, relief distributions, and green initiatives across Dhaka and beyond.
           </p>
         </div>
@@ -68,7 +69,6 @@ const gallerySection = () => {
               key={item.id}
               className="relative group h-64 rounded-2xl overflow-hidden shadow-md cursor-pointer transition-transform duration-300 hover:-translate-y-1"
             >
-             
               <Image
                 src={item.image}
                 alt={item.title}
@@ -76,7 +76,7 @@ const gallerySection = () => {
                 height={400}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
-                
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
 
               <div className="absolute top-4 left-4">

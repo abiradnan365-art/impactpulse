@@ -6,6 +6,7 @@ import { Button } from '../ui/button';
 import { ArrowRight } from 'lucide-react';
 import { authClient } from '@/lib/auth-client';
 import { toast } from 'react-toastify';
+import { getTokenFromClient } from '@/lib/getTokenFromClient';
 
 const JoiningCard = ({ event }: { event: Record<string, unknown> }) => {
 
@@ -14,12 +15,22 @@ const JoiningCard = ({ event }: { event: Record<string, unknown> }) => {
 
     const handleJoinEvent = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+        const token = await getTokenFromClient();
+              if (!user) {
+        toast.error('Please login first to join this event!');
+        // window.location.href = '/login';
+        return;
+    }
         const { _id, ...eventData } = event;
 
         // Check if the user already joined this event
         const checkRes = await fetch(
-            `http://localhost:8000/my-joining/${user?.email}`
+            `http://localhost:8000/my-joining/${user?.email}`,
+            {
+                headers: {
+                    authorization: `Bearer ${token}`,
+                }
+            }
         );
 
         const joinedEvents = await checkRes.json();
