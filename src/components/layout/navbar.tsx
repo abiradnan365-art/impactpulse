@@ -33,7 +33,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background">
       <div className="mx-auto flex h-[72px] w-full max-w-7xl items-center gap-2 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <span className="flex size-11 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-sm shadow-emerald-600/30">
             <Heart className="size-5 fill-white text-white" />
           </span>
@@ -45,7 +45,7 @@ export function Navbar() {
               Social Impact
             </span>
           </span>
-        </a>
+        </Link>
 
         {/* Links */}
         <nav aria-label="Main navigation" className="ml-5 flex items-center gap-1">
